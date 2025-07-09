@@ -1,11 +1,82 @@
-@import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 32px;
+    border-radius: 16px;
+    background: #FF8559; 
+    width: 90%;
+    margin: 24px auto;
+    box-sizing: border-box;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+}
+
+.navbar-title {
+    font-family: "Edu TAS Beginner", cursive;
+    font-size: 1.7rem;
+    color: #fff;
+    font-style: italic;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 16px;
+}
+
+.navbar-btn {
+    padding: 8px 20px;
+    border: 1px solid #fff;
+    border-radius: 24px;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.navbar-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+}
+.footer {
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 32px 0 16px 0;
+    text-align: center;
+    margin-top: 48px;
+}
+.footer-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 12px;
+}
+.footer-logo {
+    width: 40px;
+    margin-right: 16px;
+}
+.footer-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+.footer-menu a:hover {
+    text-decoration: underline;
+}
+.footer-copyright {
+    color: #888;
+    font-size: 0.95rem;
 }

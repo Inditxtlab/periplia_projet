@@ -20,7 +20,7 @@ return new class extends Migration
                   ->constrained('categories', 'id_categorie');
             $table->string('nom_voyage');
             $table->string('destination'); 
-            $table->text('description')->nullable(); 
+            $table->string('description')->nullable(); 
             $table->date('date_debut');
             $table->date('date_fin');
             $table->integer('nombre_voyageurs');

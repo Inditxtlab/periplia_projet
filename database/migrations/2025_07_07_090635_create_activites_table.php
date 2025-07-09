@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titre'); 
             $table->date('date'); 
             $table->string('lieu'); 
-            $table->text('description')->nullable(); 
+            $table->string('description')->nullable(); 
             $table->time('heure_debut'); 
             $table->time('heure_fin'); 
             $table->timestamps();

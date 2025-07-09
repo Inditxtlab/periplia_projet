@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -65,10 +70,14 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+//     'driver' => 'database',
+//     'table' => 'users',
+// ],
     ],
 
     /*
@@ -97,6 +106,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'admins' => [  // AJOUT
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens', // tu peux utiliser la même table ou une autre
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -113,3 +129,4 @@ return [
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];
+

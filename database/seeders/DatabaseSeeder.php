@@ -19,6 +19,7 @@ public function run(): void
         VoyageSeeder::class,
         ActiviteSeeder::class, 
         DocumentSeeder::class,
+        AdminSeeder::class,
     ]);
 }
 }

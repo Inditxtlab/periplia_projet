@@ -1,0 +1,129 @@
+body {
+    background: #fff;
+    font-family: 'Lato', 'Montserrat', Arial, sans-serif;
+}
+
+.voyage-container {
+    max-width: 600px;
+    margin: 40px auto 0 auto;
+    padding: 30px 0 60px 0;
+    min-height: 100vh;
+}
+
+.voyage-title {
+    text-align: center;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+
+.voyage-subtitle {
+    text-align: center;
+    color: #3e3e3e;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 2.2em;
+}
+
+.voyage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.voyage-section {
+    background: #f6fffa;
+    border-radius: 16px;
+    border: 1.5px solid #c8f2e3;
+    padding: 24px 28px 18px 28px;
+    margin-bottom: 10px;
+}
+
+.voyage-section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #1ba97a;
+}
+
+.voyage-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 16px;
+}
+.voyage-row > div {
+    flex: 1;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: block;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+select,
+textarea {
+    width: 100%;
+    padding: 9px 12px;
+    margin-bottom: 4px;
+    border: 1px solid #c6c6c6;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #1ba97a;
+    outline: none;
+}
+
+textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+.voyage-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.voyage-btn {
+    background: #ff855d;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(255,133,93,0.07);
+}
+.voyage-btn:hover {
+    background: #ff6a2b;
+}
+
+.voyage-alert {
+    background: #ffeaea;
+    color: #b70000;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+}
+
+.voyage-error {
+    color: #b70000;
+    font-size: 0.95rem;
+    margin-top: 2px;
+}

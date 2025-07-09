@@ -1,0 +1,132 @@
+body {
+    background: #fff;
+    font-family: 'Lato', 'Montserrat', Arial, sans-serif;
+}
+
+.login-title, .connexion-title {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: #fff5ee;
+    border: 1.5px solid #ffb48a;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    max-width: 600px;
+    width: 100%;
+    padding: 40px 32px 24px 32px;
+    box-sizing: border-box;
+}
+
+.login-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.login-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+form input[type="email"],
+form input[type="password"] {
+    width: 80%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+form input:focus {
+    border-color: #ff855d;
+    outline: none;
+}
+
+.login-btn {
+    width: 180px;
+    background: #ff855d;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    margin: 24px auto 0 auto;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: block;
+}
+
+.login-btn:hover {
+    background: #ff6a2b;
+}
+
+.social-login {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin: 18px 0 10px 0;
+}
+
+.social-login span {
+    font-size: 0.95rem;
+    margin-right: 6px;
+}
+
+.social-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    border-radius: 50%;
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.social-btn.google {
+    background-image: url('/images/google-icon.svg');
+}
+
+.social-btn.facebook {
+    background-image: url('/images/facebook-icon.svg');
+}
+
+.forgot-password, .register_form {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.forgot-password, .register_form a {
+    color: #1677ff;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.forgot-password, .register_form a:hover {
+    text-decoration: underline;
+}
