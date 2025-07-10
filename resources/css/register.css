@@ -1,3 +1,8 @@
+body {
+    background: #fff;
+    font-family: 'Lato', 'Montserrat', Arial, sans-serif;
+}
+
 .register-container {
     min-height: 100vh;
     display: flex;
@@ -8,7 +13,7 @@
 .register-box {
     background: #fff5ee;
     border: 1.5px solid #ffb48a;
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.03);
     max-width: 700px;
     width: 100%;
@@ -37,35 +42,77 @@ label {
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 3px;
+    display: block;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
 textarea {
     width: 100%;
     padding: 10px 12px;
-    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 1rem;
+    min-height: 60px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.register-field {
+    margin-bottom: 12px;
+}
+
+.register-row {
+    display: flex;
+    gap: 6%;
+    margin-bottom: 18px;
+}
+
+.register-row .register-field {
+    flex: 1 1 0;
+    max-width: 45%;
+}
+
+.register-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.register-field input[type="text"] {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
     border: 1px solid #ccc;
     border-radius: 7px;
     background: #fff;
     font-size: 1rem;
     transition: border 0.2s;
+    margin-bottom: 0;
+}
+
+.register-field input[type="text"]:focus {
+    border-color: #ff855d;
+    outline: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    width: 50%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 1rem;
+    transition: border 0.2s;
+    margin-bottom: 2px;
 }
 
 input:focus, textarea:focus {
     border-color: #ff855d;
     outline: none;
-}
-
-.register-row {
-    display: flex;
-    gap: 16px;
-}
-
-.register-row > div {
-    flex: 1;
 }
 
 .register-btn {
@@ -84,4 +131,11 @@ input:focus, textarea:focus {
 
 .register-btn:hover {
     background: #ff6a2b;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .register-box {
+        padding: 24px 8vw;
+    }
 }

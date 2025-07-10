@@ -5,10 +5,18 @@ use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 
 // Affichage des voyages
 Route::get('/', [VoyageController::class, 'index'])->name('home');
+
+Route::get('voyages/create', [VoyageController::class, 'create'])->name('voyages.create');
+Route::post('voyages', [VoyageController::class, 'store'])->name('voyages.store');
+
+
+Route::get('/voyages/{id_voyage}', [VoyageController::class, 'show'])->name('voyages.show');
+
 
 
 // Routes User Auth

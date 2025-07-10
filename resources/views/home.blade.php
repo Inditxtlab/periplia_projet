@@ -20,17 +20,17 @@
     </p>
     <div class="why-cards">
         <div class="why-card">
-            <img src="{{ asset('assets/icon-group.svg') }}" alt="" class="why-icon">
+            <img src="{{ asset('assets/icon_people.svg') }}" alt="Un outil dédié au voyage en groupe" class="why-icon">
             <h3>Un outil dédié au voyage en groupe</h3>
             <p>Plus besoin de jongler entre plusieurs apps.</p>
         </div>
         <div class="why-card">
-            <img src="{{ asset('assets/icon-interactive.svg') }}" alt="" class="why-icon">
+            <img src="{{ asset('assets/icon_interactivite.svg') }}" alt="Une expérience fluide et interactive" class="why-icon">
             <h3>Une expérience fluide et interactive</h3>
             <p>Chaque membre peut contribuer sans friction.</p>
         </div>
         <div class="why-card">
-            <img src="{{ asset('assets/icon-modern.svg') }}" alt="" class="why-icon">
+            <img src="{{ asset('assets/icon_voyageurs.svg') }}" alt="Pensé pour les voyageurs modernes" class="why-icon">
             <h3>Pensé pour les voyageurs modernes</h3>
             <p>Entre amis, en famille ou en groupe pro, tout devient plus simple.</p>
         </div>
@@ -42,8 +42,8 @@
     <div class="voyages-carousel">
         @forelse($voyages as $voyage)
     <div class="voyage-card">
-        <img src="{{ $voyage->image_url }}" alt="{{ $voyage->titre }}">
-        <div class="voyage-title">{{ $voyage->titre }}</div>
+        <img src="{{ $voyage->image_couverture }}" alt="{{ $voyage->nom_voyage }}">
+        <div class="voyage-title">{{ $voyage->nom_voyage }}</div>
     </div>
 @empty
     <p>Aucun voyage disponible pour le moment.</p>

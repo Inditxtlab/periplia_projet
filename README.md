@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Periplia
 
 **Periplia** est une application web de gestion et de planification de voyages collaboratifs, développée avec **Laravel**, **Vite**, **MySQL** et un design moderne en CSS pur. Elle permet aux utilisateurs de s’inscrire, de se connecter, de créer des voyages, de gérer des activités et d’inviter d’autres participants, le tout dans une interface claire et responsive.

@@ -5,6 +5,7 @@ use App\Models\Categorie;
 use App\Models\User; 
 use App\Models\Activite; 
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Voyage extends Model
@@ -14,6 +15,7 @@ class Voyage extends Model
     protected $keyType = 'string';  
     
      protected $fillable = [
+        'id_voyage',
         'id_user',
         'id_categorie',
         'nom_voyage',

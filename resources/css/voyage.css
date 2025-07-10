@@ -4,18 +4,19 @@ body {
 }
 
 .voyage-container {
-    max-width: 600px;
-    margin: 40px auto 0 auto;
-    padding: 30px 0 60px 0;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 36px;
 }
 
 .voyage-title {
-    text-align: center;
     font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 0.2em;
+    text-align: center;
+    margin-bottom: 4px;
 }
 
 .voyage-subtitle {
@@ -27,9 +28,11 @@ body {
 }
 
 .voyage-form {
+    width: 100%;
+    max-width: 650px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 32px;
 }
 
 .voyage-section {
@@ -47,41 +50,31 @@ body {
     color: #1ba97a;
 }
 
-.voyage-row {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 16px;
-}
-.voyage-row > div {
-    flex: 1;
-}
-
 label {
     font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     display: block;
 }
 
 input[type="text"],
-input[type="number"],
 input[type="date"],
+input[type="number"],
 input[type="url"],
 select,
 textarea {
     width: 100%;
-    padding: 9px 12px;
-    margin-bottom: 4px;
-    border: 1px solid #c6c6c6;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
     border-radius: 7px;
     background: #fff;
     font-size: 1rem;
     transition: border 0.2s;
+    margin-bottom: 18px;
+    box-sizing: border-box;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
     border-color: #1ba97a;
     outline: none;
 }
@@ -89,6 +82,17 @@ textarea:focus {
 textarea {
     min-height: 60px;
     resize: vertical;
+}
+
+.voyage-row {
+    display: flex;
+    gap: 6%;
+    margin-bottom: 18px;
+}
+
+.voyage-row > div {
+    flex: 1 1 0;
+    max-width: 47%;
 }
 
 .voyage-footer {
@@ -126,4 +130,18 @@ textarea {
     color: #b70000;
     font-size: 0.95rem;
     margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .voyage-form {
+        padding: 0 2vw;
+    }
+    .voyage-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .voyage-row > div {
+        max-width: 100%;
+    }
 }
