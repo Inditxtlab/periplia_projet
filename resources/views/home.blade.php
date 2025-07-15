@@ -9,7 +9,7 @@
         <img src="{{ asset('assets/img_hero.png') }}" alt="Illustration voyage autour du monde" class="header-img">
     </div>
     <div class="header-btn">
-        <a href="#" class="btn-discover">Découvrez Periplia</a>
+        <a href="{{ route('register') }}" class="btn-discover">Découvrez Periplia <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 </div>
 
@@ -42,7 +42,7 @@
     <div class="voyages-carousel">
         @forelse($voyages as $voyage)
     <div class="voyage-card">
-        <img src="{{ $voyage->image_couverture }}" alt="{{ $voyage->nom_voyage }}">
+       <img src="{{ $voyage->image_couverture ?: asset('assets/img_default.jpg') }}" alt="{{ $voyage->nom_voyage }}">
         <div class="voyage-title">{{ $voyage->nom_voyage }}</div>
     </div>
 @empty

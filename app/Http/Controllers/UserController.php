@@ -13,14 +13,23 @@ public function dashboard(Request $request)
 {
     $user = auth()->user();
 
-    $voyages = Voyage::with('categorie')
-        ->where('id_user', $user->id_user)
-        ->when($request->categorie, fn($q) => $q->where('id_categorie', $request->categorie))
-        ->when($request->status, fn($q) => $q->where('status', $request->status))
-        ->get();
+    $query = $user->voyages()->with('categorie');
 
-    $categories = Categorie::all(); // Pour les filtres
+    if ($request->filled('categorie')) {
+        $query->where('id_categorie', $request->categorie);
+    }
 
-    return view('user.dashboard', compact('voyages', 'categories'));
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    $voyages = $query->get();
+    $categories = Categorie::all();
+
+    return view('user.dashboard', [
+        'voyages' => $voyages,
+        'categories' => $categories
+    ]);
 }
+
 }

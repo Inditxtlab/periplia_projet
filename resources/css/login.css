@@ -235,9 +235,6 @@ form input:focus {
     background-image: url('/images/google-icon.svg');
 }
 
-.social-btn.facebook {
-    background-image: url('/images/facebook-icon.svg');
-}
 
 .forgot-password {
     text-align: center;

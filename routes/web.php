@@ -8,17 +8,40 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 
-// Affichage des voyages
+// Home
 Route::get('/', [VoyageController::class, 'index'])->name('home');
 
-Route::get('voyages/create', [VoyageController::class, 'create'])->name('voyages.create');
-Route::post('voyages', [VoyageController::class, 'store'])->name('voyages.store');
+//Routes Voyage (CRUD)
+//Create voyage 
+Route::get('/voyages/create', [VoyageController::class, 'create'])->name('voyages.create');
+// Par contre, pour soumettre le formulaire et créer le voyage, il y a restriction
+Route::post('/voyages', [VoyageController::class, 'store'])->middleware('auth')->name('voyages.store');
 
-
+//Affichage de voyage (uuid)
 Route::get('/voyages/{id_voyage}', [VoyageController::class, 'show'])->name('voyages.show');
 
 
+// Liste des voyages (index) il n'y a pas encore vue. C'est pour l'admin
+Route::get('admin/voyages', [VoyageController::class, 'index'])->name('voyages.index');
 
+//Edit voyage 
+Route::get('voyage/{id_voyage}/edit', [VoyageController::class, 'edit'])->middleware('auth')->name('voyages.edit'); 
+//Update - Soummision de la mise à jour 
+Route::put('voyages/{id_voyage}', [VoyageController::class, 'update'])->middleware('auth')->name('voyages.update');
+
+//Delete 
+Route::delete('voyages/{id_voyage}', [VoyageController::class, 'delete'])->middleware('auth')->name('voyages.destroy'); 
+
+//Visibilite voyage (public-prive) 
+// PATCH : méthode HTTP appropriée pour une mise à jour partielle.
+
+Route::patch('/voyages/{id_voyage}/toggle-visibilite', [VoyageController::class, 'toggleVisibilite'])
+    ->middleware('auth')
+    ->name('voyages.toggleVisibilite');
+
+
+
+//Gestion Admin et user: 
 // Routes User Auth
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
@@ -36,19 +59,8 @@ Route::prefix('admin')->group(function () {
     Route::post('login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-
-
-    Route::middleware('auth:admin')->group(function () {
+//Dash admin 
+ Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });
-
-// Formulaire accessible à tous, sans authentification
-Route::get('/voyages/create', [VoyageController::class, 'create'])->name('voyages.create');
-
-// Par contre, pour soumettre le formulaire et créer le voyage, tu peux mettre une restriction
-Route::post('/voyages', [VoyageController::class, 'store'])->middleware('auth')->name('voyages.store');
-
-
-// Liste des voyages (index) - si besoin
-Route::get('/voyages', [VoyageController::class, 'index'])->name('voyages.index');

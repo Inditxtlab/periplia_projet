@@ -41,7 +41,7 @@ body {
     background-color: #e96b3a;
 }
 
-/* Pourquoi choisir */
+/* Pour quoi choisir Periplia */
 .why-section {
     padding: 60px 20px;
     text-align: center;
@@ -110,7 +110,7 @@ body {
 
 .voyage-card img {
     width: 100%;
-    height: 160px;
+    height: 200px;
     object-fit: cover;
 }
 

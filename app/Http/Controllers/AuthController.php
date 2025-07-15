@@ -55,7 +55,7 @@ public function register(Request $request)
         'description' => 'nullable|string|max:500',
         'nom' => 'required|string|max:255',
         'prenom' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users',
+        'email' => 'required|email|max:255|unique:users', 'regex:/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/',
         'date_naissance' => 'required|date',
         'password' => 'required|string|min:4|confirmed',
         'photo_profil' => 'nullable|url',

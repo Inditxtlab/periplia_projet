@@ -23,11 +23,11 @@
 </head>
 
 <body>
-    @include('layouts.header') <!-- Ta navbar -->
+    @include('layouts.header') 
     <main>
-        @yield('content') <!-- Le contenu spécifique à chaque page -->
+        @yield('content') 
     </main>
-    @include('layouts.footer') <!-- Ton footer -->
+    @include('layouts.footer') 
 </body>
 
 </html>
