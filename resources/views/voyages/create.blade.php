@@ -94,7 +94,7 @@
                 </div>
                 <div>
                     <label for="image_couverture">Image de couverture (URL)</label>
-                    <input type="url" name="image_couverture" id="image_couverture" value="{{ old('image_couverture', url('assets/images/default-voyage.jpg'))) }}"
+                    <input type="url" name="image_couverture" id="image_couverture" value="{{ old('image_couverture', url('assets/images/default-voyage.jpg')) }}"
                         placeholder="https://exemple.com/image.jpg">
                     @error('image_couverture')
                         <div class="voyage-error">{{ $message }}</div>
