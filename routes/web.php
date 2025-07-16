@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 // Home
 Route::get('/', [VoyageController::class, 'index'])->name('home');
 
+
 //Routes Voyage (CRUD)
 //Create voyage 
 Route::get('/voyages/create', [VoyageController::class, 'create'])->name('voyages.create');
@@ -52,6 +53,19 @@ Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:web')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
+
+Route::get('/profile', [UserController::class, 'profile'])
+    ->middleware('auth:web')
+    ->name('profile.show');
+
+
+Route::middleware('auth:web')->group(function () {
+    Route::get('/profile/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/profile/update', [UserController::class, 'update'])->name('user.update');
+    Route::get('/profile/password', [UserController::class, 'editPassword'])->name('user.password.edit');
+    Route::put('/profile/password', [UserController::class, 'updatePassword'])->name('user.password.update');
+});
+
 
 // Routes Admin Auth
 Route::prefix('admin')->group(function () {

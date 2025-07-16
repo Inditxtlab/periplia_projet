@@ -8,9 +8,9 @@
         @if(auth('web')->check() || auth('admin')->check())
             {{-- Message de bienvenue visible uniquement si l'utilisateur est connecté --}}
             <span class="bienvenue">
-            Bienvenue, {{ auth('web')->check() ? Auth::user()->prenom : auth('admin')->user()->email }}
-    </span>
-@endif
+                Bienvenue, {{ auth('web')->check() ? Auth::user()->prenom : auth('admin')->user()->email }}
+            </span>
+        @endif
     </div>
 
     <div class="navbar-right">
@@ -23,11 +23,12 @@
                 @csrf
                 <button type="submit" class="navbar-btn">Déconnexion</button>
             </form>
-
             {{-- Avatar utilisateur connecté (placé après le bouton de déconnexion) --}}
             <div class="avatar_user">
-                <img class="photo_user" src="{{ Auth::user()->photo_profil ?? asset('assets/default-avatar.png') }}"
-                    alt="Avatar">
+                <a href="{{ route('profile.show') }}">
+                    <img class="photo_user" src="{{ Auth::user()->photo_profil ?? asset('assets/default-avatar.png') }}"
+                        alt="Avatar">
+                </a>
             </div>
         @elseif(auth('admin')->check())
             <a href="{{ route('admin.dashboard') }}" class="navbar-btn">Dashboard</a>
