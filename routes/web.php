@@ -58,12 +58,16 @@ Route::get('/profile', [UserController::class, 'profile'])
     ->middleware('auth:web')
     ->name('profile.show');
 
-
+//CRUD - USer 
 Route::middleware('auth:web')->group(function () {
     Route::get('/profile/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/profile/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/profile/password', [UserController::class, 'editPassword'])->name('user.password.edit');
     Route::put('/profile/password', [UserController::class, 'updatePassword'])->name('user.password.update');
+
+    Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy')->middleware('auth');
+
+
 });
 
 

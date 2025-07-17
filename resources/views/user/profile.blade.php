@@ -112,6 +112,21 @@
 </style>
 
 {{-- Boutons en haut à droite --}}
+{{-- Message de succès --}}
+<div class="container">
+    @if (session('success'))
+        <div class="alert alert-success" style="color: green; padding: 10px; margin-bottom: 1rem;">
+            {{ session('success') }}
+        </div>
+    @endif
+      @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+    
 <div class="profile-actions">
     <a href="{{ route('user.edit') }}">
         <button class="btn-edit">Modifier le profil</button>
@@ -142,7 +157,7 @@
 
 {{-- Bouton de suppression en bas à droite --}}
 <div class="delete-section">
-    <form action={{-- "{{ route('user.delete') }}"--}} method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+    <form action="{{ route('profile.destroy') }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn-delete">Supprimer mon compte</button>

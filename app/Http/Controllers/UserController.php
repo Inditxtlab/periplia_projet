@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie; 
 use App\Models\Voyage; 
-use Illuminate\Support\Facades\Hash;
 use App\Models\User; 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -56,11 +56,13 @@ public function update(Request $request)
         'email' => 'required|email|max:255',
         'date_naissance' => 'nullable|date',
         'description_profil' => 'nullable|string',
+        'photo_profil' => 'nullable|url',
     ]);
 
     $user->update($validated);
+   
 
-    return redirect()->route('user.edit')->with('success', 'Profil mis à jour.');
+    return redirect()->route('profile.show')->with('success', 'Profil mis à jour.');
 }
 
 public function editPassword()
@@ -70,20 +72,37 @@ public function editPassword()
 
 public function updatePassword(Request $request)
 {
-    $user = auth()->user();
-
     $request->validate([
-        'current_password' => 'required',
-        'password' => 'required|string|min:8|confirmed',
+        'current_password'      => ['required'],
+        'password'              => ['required', 'string', 'min:8', 'confirmed'],
     ]);
 
-    if (!$user || !is_string($user->password) || !\Hash::check($request->current_password, $user->password)) {
-    return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
-}
+    $user = Auth::user();
 
-    $user->password = \Hash::make($request->password);
+    // Vérifie que le mot de passe actuel est correct
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
+    }
+
+    // Met à jour le mot de passe
+    $user->password = Hash::make($request->password);
     $user->save();
 
-    return redirect()->route('user.password.edit')->with('success', 'Mot de passe mis à jour.');
+    return redirect()->route('profile.show')->with('success', 'Mot de passe mis à jour avec succès.');
 }
+
+public function destroy()
+{
+    $user = auth()->user();
+
+    // Optionnel : déconnecter l'utilisateur avant suppression
+    Auth::logout();
+
+    // Supprimer l'utilisateur
+    $user->delete();
+
+    // Rediriger vers la page d'accueil ou page de confirmation
+    return redirect('/')->with('success', 'Votre compte a bien été supprimé.');
+}
+
 }

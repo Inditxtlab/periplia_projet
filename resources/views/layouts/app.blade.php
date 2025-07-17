@@ -19,7 +19,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Chargement des fichiers CSS et JS via Vite -->
-    @vite(['resources/css/app.css', 'resources/css/home.css', 'resources/css/login.css', 'resources/css/register.css', 'resources/css/voyage.css', 'resources/js/app.js'])
+ @vite([
+    'resources/css/app.css',
+    'resources/css/home.css',
+    'resources/css/login.css',
+    'resources/css/register.css',
+    'resources/css/voyage.css',
+    'resources/css/uedit.css',
+    'resources/js/app.js'
+])
+
 </head>
 
 <body>
