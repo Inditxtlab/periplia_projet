@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\AdminController;
@@ -82,3 +83,9 @@ Route::prefix('admin')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
 });
+
+Route::middleware('auth')->group(function () {
+    Route::resource('activites', ActiviteController::class)->except(['index', 'show', 'create', 'edit']);
+});
+
+
