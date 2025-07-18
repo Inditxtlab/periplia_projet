@@ -67,19 +67,49 @@ class VoyageController extends Controller
      * Display the specified resource.
      */
     public function show($id_voyage)
-    {
-        $voyage = Voyage::with('categorie', 'user')->findOrFail($id_voyage);
+{
+    $voyage = Voyage::with('categorie', 'user')->findOrFail($id_voyage);
 
-        $activitesParJour = Activite::where('id_voyage', $voyage->id_voyage)
-            ->orderBy('date')
-            ->orderBy('heure_debut')
-            ->get()
-            ->groupBy(function ($item) {
-                return \Carbon\Carbon::parse($item->date)->format('Y-m-d');
-            });
-        // Passe $activitesParJour à la vue
-        return view('voyages.show', compact('voyage', 'activitesParJour'));
+    $typesActivites = [
+    'Visite culturelle',
+    'Lieu historique',
+    'Rencontre locale',
+    'Balade nature',
+    'Randonnée',
+    'Activité sportive',
+    'Excursion',
+    'Concert ou spectacle',
+    'Atelier / Cours',
+    'Repas',
+    'Détente / Spa',
+    'Hébergement',
+    'Trajet',
+    'Location',
+    'Rendez-vous',
+    'Autre'
+];
+
+    // Génère tous les jours du voyage entre la date de début et de fin inclus
+    $dateDebut = \Carbon\Carbon::parse($voyage->date_debut);
+    $dateFin   = \Carbon\Carbon::parse($voyage->date_fin);
+
+    $jours = [];
+    for ($i = 0; $i <= $dateDebut->diffInDays($dateFin); $i++) {
+        $jours[] = $dateDebut->copy()->addDays($i)->format('Y-m-d');
     }
+
+    // Récupère et groupe les activités par date
+    $activitesParJour = Activite::where('id_voyage', $voyage->id_voyage)
+        ->orderBy('date')
+        ->orderBy('heure_debut')
+        ->get()
+        ->groupBy(function ($item) {
+            return \Carbon\Carbon::parse($item->date)->format('Y-m-d');
+        });
+
+    return view('voyages.show', compact('voyage', 'typesActivites', 'activitesParJour', 'jours'));
+}
+
 
     public function edit($id_voyage)
     {

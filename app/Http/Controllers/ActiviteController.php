@@ -23,19 +23,22 @@ class ActiviteController extends Controller
         return back();
     }
 
-    public function update(Request $request, Activite $activite)
-    {
-        $request->validate([
-            'titre' => 'required',
-            'date' => 'required|date',
-            'heure_debut' => 'required',
-            'heure_fin' => 'required|after:heure_debut',
-            'lieu' => 'nullable',
-            'type' => 'nullable'
-        ]);
-        $activite->update($request->all());
-        return back();
-    }
+  public function update(Request $request, Activite $activite)
+{
+    $validated = $request->validate([
+        'titre' => 'required',
+        'date' => 'required|date',
+        'heure_debut' => 'required',
+        'heure_fin' => 'required|after:heure_debut',
+        'lieu' => 'nullable',
+        'description'=> 'nullable', 
+        'type' => 'nullable',
+    ]);
+
+    $activite->update($validated);
+    return back()->with('success', 'Activité mise à jour avec succès.');
+
+}
 
     public function destroy(Activite $activite)
     {

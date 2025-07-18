@@ -88,4 +88,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('activites', ActiviteController::class)->except(['index', 'show', 'create', 'edit']);
 });
 
+// Le CRUD des activités est protégé par auth, mais avec des méthodes exclues (index, show, create, edit), ce qui est logique si ces vues sont gérées autrement -via modals: fenêtre contextuelle (popup) qui s’affiche par-dessus le contenu principal de la page sans redirection ni rechargement
+
 

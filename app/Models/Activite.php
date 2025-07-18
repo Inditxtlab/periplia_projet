@@ -17,6 +17,7 @@ class Activite extends Model
         'heure_debut',
         'heure_fin',
         'id_voyage',
+        'type', 
     ];
 
     /**

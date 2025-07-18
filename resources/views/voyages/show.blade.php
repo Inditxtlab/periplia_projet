@@ -35,7 +35,6 @@
                 object-fit: cover;
                 display: block;
                 max-height: 440px;
-
             }
 
             .hero-voyage-lock {
@@ -139,18 +138,166 @@
                 margin-bottom: 16px;
             }
 
-            .bloc-jour {
-    background: #fff8f4;
-    border-radius: 16px;
-    margin: 22px 0;
-    padding: 18px 24px;
-    box-shadow: 0 2px 12px #ffeede;
-}
-ul { list-style: none; padding: 0; }
-li { margin: 7px 0; }
-button { border-radius: 9px; border: none; background: #ffd1bb; color: #fff; padding: 5px 13px; margin-left: 8px; }
-button:hover { background: #ff873a; color: #fff; }
+            /* Styles pour les jours scrollables */
+            .jours-scroll-outer {
+                width: 100%;
+                overflow-x: auto;
+                padding: 28px 0 16px 0;
+                margin-top: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
 
+            .jours-scroll-row {
+                display: flex;
+                gap: 20px;
+                padding: 0 20px;
+                min-width: max-content;
+            }
+
+            .jour-colonne {
+                background: #fff8f4;
+                border-radius: 16px;
+                box-shadow: 0 2px 12px #ffeede;
+                padding: 18px 20px;
+                min-width: 260px;
+                max-width: 320px;
+                flex: 0 0 auto;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .jour-header {
+                font-size: 1.08em;
+                margin-bottom: 14px;
+                font-weight: 600;
+            }
+
+            .jour-date {
+                color: #bb9995;
+                font-size: 0.9em;
+                font-weight: normal;
+            }
+
+            .jour-activites {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                min-height: 200px;
+            }
+
+            .activite-carte {
+                background: #fff;
+                border: 1.2px solid #ffceb8;
+                border-radius: 13px;
+                box-shadow: 0 2px 8px #ffe3db;
+                padding: 10px 12px;
+            }
+
+            .activite-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 4px;
+            }
+
+            .btn-action {
+                background: none;
+                border: none;
+                color: #ff8559;
+                cursor: pointer;
+                padding: 0 4px;
+            }
+
+            .no-activite {
+                text-align: center;
+                color: #e3bbb1;
+                font-size: 0.99em;
+                margin-top: 30px;
+            }
+
+            .btn-add {
+                font-size: 1.15em;
+                color: #fff;
+                background: #fa8d56;
+                border: none;
+                padding: 4px 14px;
+                border-radius: 9px;
+                margin-top: 12px;
+                cursor: pointer;
+            }
+
+            /* Style modal */
+            .modal-activite {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .modal-content {
+                background: #fff;
+                border-radius: 16px;
+                padding: 24px;
+                width: 100%;
+                max-width: 500px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+
+            /* Scrollbar personnalisée */
+            .jours-scroll-outer::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .jours-scroll-outer::-webkit-scrollbar-track {
+                background: #fff8f4;
+                border-radius: 10px;
+            }
+
+            .jours-scroll-outer::-webkit-scrollbar-thumb {
+                background: #ffceb8;
+                border-radius: 10px;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            li {
+                margin: 7px 0;
+            }
+
+            button {
+                border-radius: 9px;
+                border: none;
+                background: #ffd1bb;
+                color: #fff;
+                padding: 5px 13px;
+                margin-left: 8px;
+            }
+
+            button:hover {
+                background: #ff873a;
+                color: #fff;
+            }
         </style>
 
 
@@ -159,12 +306,10 @@ button:hover { background: #ff873a; color: #fff; }
                 class="hero-voyage-cover-img">
 
             <!-- Icône cadenas (confidentialité) -->
-            <!-- ce lien déclenche un changement de visibilité sans recharger la page, avec des données dynamiques grâce aux data-*. -->
             <a href="#" class="hero-voyage-lock" data-id="{{ $voyage->id_voyage }}"
                 data-visibilite="{{ $voyage->visibilite }}" id="btn-toggle-visibilite" title="Changer la visibilité">
                 <i class="fa-solid {{ $voyage->visibilite ? 'fa-lock-open' : 'fa-lock' }}"></i>
             </a>
-
 
             <!-- Infos sur l'image -->
             <div class="hero-voyage-info-row">
@@ -180,10 +325,10 @@ button:hover { background: #ff873a; color: #fff; }
                 </span>
             </div>
         </div>
+
         <div class="hero-voyage-delete-row">
             @auth
                 @if (auth()->id() === $voyage->id_user)
-
                     <!-- Bouton Modifier -->
                     <a href="{{ route('voyages.edit', $voyage->id_voyage) }}" class="hero-voyage-edit-btn">
                         <i class="fa-solid fa-pen-to-square"></i> Modifier voyage
@@ -202,45 +347,105 @@ button:hover { background: #ff873a; color: #fff; }
             @endauth
         </div>
 
-        @foreach($activitesParJour as $date => $activites)
-            <div class="bloc-jour">
-                <h4>Jour {{ $loop->iteration }} – {{ \Carbon\Carbon::parse($date)->translatedFormat('l d F') }}</h4>
-                <ul>
-                    @foreach($activites as $a)
-                        <li>
-                            <strong>{{ $a->titre }}</strong>
-                            – {{ $a->heure_debut }} → {{ $a->heure_fin }}
-                            @auth
-                                <form action="{{ route('activites.destroy', $a) }}" method="POST" style="display:inline;">
-                                    @csrf @method('DELETE')
-                                    <button type="submit">🗑️</button>
-                                </form>
-                                <button onclick="showEditForm({{ $a->id }})">✏️</button>
-                            @endauth
-                        </li>
-                    @endforeach
-                </ul>
-                @auth
-                    <button onclick="showAddForm('{{ $date }}')">➕ Nouvelle activité</button>
-                @endauth
-            </div>
-        @endforeach
+        <!-- Section des jours scrollable -->
+        <div class="jours-scroll-outer">
+            <div class="jours-scroll-row">
+                @foreach($jours as $idx => $date)
+                    <div class="jour-colonne">
+                        <div class="jour-header">
+                            Jour {{ $idx + 1 }}<br>
+                            <span class="jour-date">Date {{ \Carbon\Carbon::parse($date)->translatedFormat('d/m/Y') }}</span>
+                        </div>
 
-        <!-- Formulaire d'ajout/édition (modal ou inline, exemple basique) -->
-        <div id="form-activite" style="display:none;">
-            <form method="POST" action="{{ route('activites.store') }}">
-                @csrf
-                <input type="hidden" name="id_voyage" value="{{ $voyage->id_voyage }}">
-                <input type="hidden" name="date" id="form-date">
-                <input name="titre" placeholder="Titre" required>
-                <input name="heure_debut" type="time" required>
-                <input name="heure_fin" type="time" required>
-                <input name="lieu" placeholder="Lieu">
-                <input name="type" placeholder="Type">
-                <button type="submit">Enregistrer</button>
-                <button type="button"
-                    onclick="document.getElementById('form-activite').style.display='none'">Annuler</button>
-            </form>
+                        <div class="jour-activites">
+                            @foreach($activitesParJour[$date] ?? [] as $a)
+                                <div class="activite-carte">
+                                    <div class="activite-top">
+                                        <strong>{{ $a->titre }}</strong>
+                                        <span>
+                                            <button onclick="showEditForm({{ $a->id }})" class="btn-action"
+                                                style="color:#ffb75d;">✏️</button>
+                                            <form action="{{ route('activites.destroy', $a) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="btn-action">🗑️</button>
+                                            </form>
+                                        </span>
+                                    </div>
+                                    <div><b>Lieu:</b> {{ $a->lieu ?? '-' }}</div>
+                                    <div><b>Heure:</b> {{ $a->heure_debut }} → {{ $a->heure_fin }}</div>
+                                    <div><b>Type d'activite:</b> {{ $a->type ?? '-' }}</div>
+                                    <div><strong>Description :</strong> {{ $a->description }}</div>
+                                </div>
+                            @endforeach
+
+                            @if(empty($activitesParJour[$date]))
+                                <div class="no-activite">Aucune activité</div>
+                            @endif
+                        </div>
+
+                        @auth
+                            <div style="text-align:center;">
+                                <button onclick="showAddForm('{{ $date }}')" class="btn-add">+ Ajouter</button>
+                            </div>
+                        @endauth
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <!-- Formulaire d'ajout/édition modal -->
+        <div id="form-activite" class="modal-activite">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('activites.store') }}">
+                    @csrf
+                    <input type="hidden" name="id_voyage" value="{{ $voyage->id_voyage }}">
+                    <input type="hidden" name="date" id="form-date">
+
+                    <div class="form-group">
+                        <label for="titre">Titre</label>
+                        <input name="titre" id="titre" value="{{ old('titre') }}" class="form-control"
+                            placeholder="Titre de l'activité" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="heure_debut">Heure de début</label>
+                        <input name="heure_debut" id="heure_debut" value="{{ old('heure_debut') }}" type="time"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heure_fin">Heure de fin</label>
+                        <input name="heure_fin" id="heure_fin" value="{{ old('heure_fin') }}" type="time"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lieu">Lieu</label>
+                        <input name="lieu" id="lieu" value="{{ old('lieu') }}" class="form-control"
+                            placeholder="Lieu de l'activité">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type d'activité</label>
+                        <select name="type" class="form-control">
+                            @foreach($typesActivites as $type)
+                                <option value="{{ $type }}" {{ old('type') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" class="form-control"
+                            placeholder="Description de l'activité">{{ old('description') }}</textarea>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                        <button type="button" onclick="document.getElementById('form-activite').style.display='none'"
+                            style="background:#e0e0e0; color:#333;">Annuler</button>
+                        <button type="submit" style="background:#fa8d56;">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Javascript - Description et visibilité  -->
@@ -261,11 +466,11 @@ button:hover { background: #ff873a; color: #fff; }
                 });
             });
 
-            // PATCH	Utilisé pour modifier une seule donnée (visibilite) plutôt qu’un objet entier.
+            // PATCH	Utilisé pour modifier une seule donnée (visibilite) plutôt qu'un objet entier.
             // fetch	API moderne pour faire des appels HTTP sans jQuery.
             // X-CSRF-TOKEN	Laravel protège toutes ses routes POST/PATCH/DELETE avec un token CSRF, pour éviter les attaques.
             // data-*	On utilise des attributs HTML personnalisés (data-id, data-visibilite) pour transmettre facilement des infos au JS.
-            // classList.add/remove	Permet de changer dynamiquement l’apparence sans recharger la page.
+            // classList.add/remove	Permet de changer dynamiquement l'apparence sans recharger la page.
             // .catch()	Permet de gérer proprement les erreurs si le serveur ne répond pas.
 
             document.addEventListener('DOMContentLoaded', function () {
@@ -275,7 +480,7 @@ button:hover { background: #ff873a; color: #fff; }
                     e.preventDefault(); // On empêche le lien de rediriger
 
                     const voyageId = btnLock.dataset.id;
-                    const icon = btnLock.querySelector('i'); // On cible l’icône <i> dans le lien
+                    const icon = btnLock.querySelector('i'); // On cible l'icône <i> dans le lien
 
                     fetch(`/voyages/${voyageId}/toggle-visibilite`, {
                         method: 'PATCH',
@@ -292,7 +497,7 @@ button:hover { background: #ff873a; color: #fff; }
                                 // Mise à jour de l'attribut data
                                 btnLock.dataset.visibilite = nouvelleVisibilite;
 
-                                // Changement d’icône selon nouvelle visibilité
+                                // Changement d'icône selon nouvelle visibilité
                                 if (nouvelleVisibilite == 1) {
                                     icon.classList.remove('fa-lock');
                                     icon.classList.add('fa-lock-open');
@@ -301,7 +506,7 @@ button:hover { background: #ff873a; color: #fff; }
                                     icon.classList.add('fa-lock');
                                 }
                             } else {
-                                alert('Erreur : ' + data.error); // Message d'erreur si l’opération échoue
+                                alert('Erreur : ' + data.error); // Message d'erreur si l'opération échoue
                             }
                         })
                         .catch(error => {
@@ -311,8 +516,27 @@ button:hover { background: #ff873a; color: #fff; }
             });
 
             function showAddForm(date) {
-                document.getElementById('form-activite').style.display = 'block';
+                document.getElementById('form-activite').style.display = 'flex';
                 document.getElementById('form-date').value = date;
             }
+
+            function showEditForm(id) {
+                // Appel AJAX pour récupérer les données de l'activité si nécessaire
+                // Puis afficher le formulaire pré-rempli
+                document.getElementById('form-activite').style.display = 'flex';
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    document.getElementById('form-activite').style.display = 'none';
+                }
+            });
+
+            document.getElementById('form-activite').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+
         </script>
 @endsection
