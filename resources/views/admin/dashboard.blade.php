@@ -4,5 +4,7 @@
 
 @section('content')
 
- <h1>Bienvenue sur le dashboard admin</h1>
+ <h2>Bienvenue Administrateur du site</h2>
+
+ 
 @endsection
